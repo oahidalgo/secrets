@@ -8,17 +8,14 @@ const dbName = process.env.MONGODB_DB_NAME;
 const uri = `mongodb+srv://${dbUser}:${dbPassword}@${clusterAddress}/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri);
 
-console.log('Trying to connect to db');
+console.log('Trying to connect to db', uri);
 
 try {
   await client.connect();
   await client.db(dbName).command({ ping: 1 });
   console.log('Connected successfully to server');
 } catch (error) {
-  console.log(
-    'Connection failed.',
-    `mongodb+srv://${dbUser}:${dbPassword}@${clusterAddress}/?retryWrites=true&w=majority`
-  );
+  console.log('Connection failed.');
   await client.close();
   console.log('Connection closed.');
 }

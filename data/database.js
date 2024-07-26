@@ -15,7 +15,10 @@ try {
   await client.db(dbName).command({ ping: 1 });
   console.log('Connected successfully to server');
 } catch (error) {
-  console.log('Connection failed.', error);
+  console.log(
+    'Connection failed.',
+    `mongodb+srv://${dbUser}:${dbPassword}@${clusterAddress}/?retryWrites=true&w=majority`
+  );
   await client.close();
   console.log('Connection closed.');
 }
